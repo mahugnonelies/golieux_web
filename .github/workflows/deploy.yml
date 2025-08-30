@@ -4,77 +4,52 @@ on:
   push:
     branches: [ main ]
 
-# Nécessaire pour GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
-
-env:
-  # ✅ Mets ICI exactement la version qui marche chez toi (résultat de: flutter --version)
-  # Exemples valides: "3.24.3" ou "3.35.2"
-  FLUTTER_VERSION: "3.35.2"
-  # ✅ Le sous-dossier si ton repo s’appelle golieux_web (GitHub Pages sert /<repo>/)
-  BASE_HREF: "/golieux_web/"
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: "stable"
-          cache: true
+          flutter-version: "3.22.2"   # stable récente
 
-      - name: Flutter doctor (debug)
+      - name: Enable web & show versions
         run: |
           flutter --version
-          flutter doctor -v
-          dart --version
-
-      # Petit plus: désactiver l’analytics pour éviter du bruit
-      - name: Disable Flutter analytics
-        run: flutter config --no-analytics
-
-      # Cache des packages pub pour accélérer
-      - name: Cache pub
-        uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
+          flutter config --enable-web
 
       - name: Install dependencies
         run: flutter pub get
 
-      # 💡 build web en mode verbose + renderer stable + base-href adapté à GitHub Pages
-      - name: Build Flutter Web (verbose)
-        run: |
-          flutter build web \
-            --release \
-            --verbose \
-            --web-renderer canvaskit \
-            --base-href "${{ env.BASE_HREF }}"
-
-      # Préparer GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Build Flutter Web (release)
+        run: flutter build web --release   # 👈 pas de --web-renderer
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
