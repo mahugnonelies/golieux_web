@@ -1,20 +1,12 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Deploy Flutter Web to GitHub Pages (gh-pages)
 
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,32 +16,23 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
-          flutter-version: "3.22.2"   # stable récente
+          # Adapte si besoin, mais 3.22.2 est stable et marche avec ton projet
+          flutter-version: '3.22.2'
+          channel: 'stable'
+          cache: true
 
-      - name: Enable web & show versions
-        run: |
-          flutter --version
-          flutter config --enable-web
-
-      - name: Install dependencies
+      - name: Flutter pub get
         run: flutter pub get
 
       - name: Build Flutter Web (release)
-        run: flutter build web --release   # 👈 pas de --web-renderer
+        # IMPORTANT: base-href = /<nom_du_repo>/
+        run: flutter build web --release --base-href=/golieux_web/
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      # Déploiement sur la branche gh-pages (pas d’environnement protégé)
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: build/web
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
+          publish_branch: gh-pages
+          force_orphan: true
