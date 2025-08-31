@@ -2,8 +2,7 @@ name: Deploy Flutter Web to GitHub Pages (gh-pages)
 
 on:
   push:
-    branches:
-      - main   # déploiement uniquement quand tu pushes sur "main"
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -16,17 +15,39 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.2'   # version Flutter stable
-          channel: 'stable'
+          flutter-version: '3.22.2'
+          channel: stable
           cache: true
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Flutter doctor
+        run: flutter doctor -v
 
-      - name: Build Flutter Web (release)
-        run: flutter build web --release --base-href /golieux_web/
+      - name: Clean
+        run: flutter clean
+
+      - name: Pub get (no-precompile)
+        run: flutter pub get --no-precompile
+
+      - name: Flutter analyze
+        run: flutter analyze
+        continue-on-error: true  # on n'échoue pas le job juste pour des warnings
+
+      - name: Build Flutter Web (verbose)
+        run: |
+          set -o pipefail
+          flutter build web --release --base-href /golieux_web/ -v 2>&1 | tee build_log.txt
+
+      - name: Upload build log (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build_log.txt
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Deploy to gh-pages
+        if: success()  # seulement si la build a réussi
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
