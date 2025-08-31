@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Flutter Web (release, log to file)
         run: |
-          flutter build web --release --base-href=/golieux_web/ > build_log.txt 2>&1
+          flutter build web --release --base-href /golieux_web/ > build_log.txt 2>&1
 
       - name: Upload build log (always)
         if: always()
