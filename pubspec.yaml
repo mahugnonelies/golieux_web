@@ -47,3 +47,10 @@ flutter:
     # - assets/hero.png        # (optionnel)
     # - assets/screen1.png     # (optionnel)
   # - assets/screen2.png     # (optionnel)
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
