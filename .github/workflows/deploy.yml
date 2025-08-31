@@ -2,8 +2,10 @@ name: Deploy Flutter Web to GitHub Pages (gh-pages)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
+permissions:
+  contents: write  # requis pour pousser vers gh-pages avec GITHUB_TOKEN
 
 jobs:
   build-and-deploy:
@@ -17,7 +19,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.2'
-          channel: 'stable'
+          channel: stable
           cache: true
 
       - name: Flutter pub get
@@ -27,12 +29,13 @@ jobs:
         run: |
           flutter build web --release --base-href=/golieux_web/ > build_log.txt 2>&1
 
-      - name: Upload build log (always, even on failure)
+      - name: Upload build log (always)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build_log
           path: build_log.txt
+          if-no-files-found: warn
 
       - name: Deploy to gh-pages
         if: success()
