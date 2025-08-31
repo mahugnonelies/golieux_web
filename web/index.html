@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    Si vous servez votre application Flutter Web dans un chemin
-    autre que la racine, ajustez le base href ci-dessous.
-
-    Ici, GitHub Pages utilise : /golieux_web/
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+  <!-- IMPORTANT : base fixe pour GitHub Pages -->
+  <base href="/golieux_web/">
 
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="description" content="GoLieux vous aide à trouver rapidement les lieux utiles au Bénin : pharmacies, banques, services publics, artisans, etc.">
 
-  <!-- iOS meta tags & icons -->
+  <!-- iOS / PWA -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="golieux_web">
   <link rel="apple-touch-icon" href="./icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./favicon.png"/>
+  <link rel="icon" type="image/png" href="./favicon.png">
 
   <title>GoLieux — Trouve rapidement les lieux utiles</title>
 
-  <!-- Manifest -->
+  <!-- Manifest en chemin relatif -->
   <link rel="manifest" href="./manifest.json">
 </head>
 <body>
-<!-- Script bootstrap Flutter (relatif au même dossier) -->
+<!-- Bootstrap Flutter en chemin relatif -->
 <script src="./flutter_bootstrap.js" defer></script>
 </body>
 </html>
