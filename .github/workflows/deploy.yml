@@ -25,9 +25,8 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Build Flutter Web (release, log to file)
-        run: |
-          flutter build web --release --base-href /golieux_web/ > build_log.txt 2>&1
+      - name: Build Flutter Web (release)
+        run: flutter build web --release --base-href=/golieux_web/
 
       - name: Upload build log (always)
         if: always()
