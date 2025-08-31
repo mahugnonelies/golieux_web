@@ -1,43 +1,37 @@
-name: Deploy Flutter Web to GitHub Pages (gh-pages)
+name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write  # requis pour pousser vers gh-pages avec GITHUB_TOKEN
+    branches:
+      - main   # Déclenche le déploiement sur chaque push dans main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # Étape 1 : Récupérer le code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Étape 2 : Installer Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.2'
-          channel: stable
+          flutter-version: "3.22.2"
+          channel: "stable"
           cache: true
 
-      - name: Flutter pub get
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Flutter Web (release)
-        run: flutter build web --release --pwa-strategy=none
+      # Étape 4 : Build Flutter Web avec le bon base-href
+      - name: Build Flutter Web
+        run: flutter build web --release --base-href=/golieux_web/
 
-      - name: Upload build log (always)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build_log
-          path: build_log.txt
-          if-no-files-found: warn
-
-      - name: Deploy to gh-pages
-        if: success()
+      # Étape 5 : Déploiement sur gh-pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

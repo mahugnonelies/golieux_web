@@ -1,29 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <!-- IMPORTANT : base fixe pour GitHub Pages -->
-  <base href="/golieux_web/">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+            name="description"
+            content="GoLieux vous aide à trouver rapidement les lieux utiles au Bénin : pharmacies, banques, services publics, artisans, etc."
+    />
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="description" content="GoLieux vous aide à trouver rapidement les lieux utiles au Bénin : pharmacies, banques, services publics, artisans, etc.">
+    <!-- IMPORTANT pour GitHub Pages : base sur le sous-répertoire du repo -->
+    <base href="$FLUTTER_BASE_HREF">
 
-  <!-- iOS / PWA -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="golieux_web">
-  <link rel="apple-touch-icon" href="./icons/Icon-192.png">
+    <!-- iOS / PWA -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="GoLieux" />
+    <link rel="apple-touch-icon" href="/golieux_web/icons/Icon-192.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./favicon.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/golieux_web/favicon.png" />
 
-  <title>GoLieux — Trouve rapidement les lieux utiles</title>
+    <title>GoLieux — Trouve rapidement les lieux utiles</title>
 
-  <!-- Manifest en chemin relatif -->
-  <link rel="manifest" href="./manifest.json">
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="/golieux_web/manifest.json" />
 </head>
 <body>
-<!-- Bootstrap Flutter en chemin relatif -->
-<script src="./flutter_bootstrap.js" defer></script>
+<!-- Script bootstrap Flutter (chemin absolu vers le sous-dossier du repo) -->
+<script src="/golieux_web/flutter_bootstrap.js" defer></script>
+
+<!-- Fallback très conservateur (ancien pipeline) : si jamais le bootstrap n'existe pas -->
+<script>
+    (function() {
+      var test = document.createElement('link');
+      test.rel = 'prefetch';
+      test.href = '/golieux_web/flutter_bootstrap.js';
+      test.onload = function(){ /* ok */ };
+      test.onerror = function(){
+        var s = document.createElement('script');
+        s.src = '/golieux_web/main.dart.js';
+        s.defer = true;
+        document.body.appendChild(s);
+      };
+      document.head.appendChild(test);
+    })();
+</script>
 </body>
 </html>
