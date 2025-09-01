@@ -49,9 +49,10 @@ flutter:
     - assets/legal/terms.md
     - assets/legal/legal_notice.md
 
-    # - assets/hero.png        # (optionnel)
-    # - assets/screen1.png     # (optionnel)
-  # - assets/screen2.png     # (optionnel)
+    - assets/hero.png
+    - assets/screen1.png
+    - assets/screen2.png
+    - assets/screen3.png
 
   fonts:
     - family: Roboto

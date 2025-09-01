@@ -1,7 +1,7 @@
 # Politique de confidentialité — GoLieux
 
 **Dernière mise à jour : 15/09/2025**
-**Contact : [contact@golieux.app](mailto:contact@golieux.app)**
+**Contact : [contact@golieux.com](mailto:contact@golieux.com)**
 
 Bienvenue sur **GoLieux**. La protection de vos données personnelles est essentielle pour nous. Cette politique explique **quelles informations nous collectons**, **pourquoi**, **comment nous les protégeons** et **vos droits**.
 
@@ -75,7 +75,7 @@ Selon la réglementation applicable (ex. RGPD), vous disposez des droits suivant
 * **Portabilité** (dans la mesure prévue par la loi)
 * **Retrait du consentement** à tout moment (ex. localisation)
 
-Pour exercer vos droits : **[contact@golieux.app](mailto:contact@golieux.app)**
+Pour exercer vos droits : **[contact@golieux.com](mailto:contact@golieux.com)**
 
 > Nous pouvons vous demander des informations supplémentaires pour confirmer votre identité.
 
@@ -114,7 +114,7 @@ Nous pouvons mettre à jour cette Politique de confidentialité. En cas de chang
 ## 11) Nous contacter
 
 Pour toute question relative à cette Politique, ou pour exercer vos droits :
-**[contact@golieux.app](mailto:contact@golieux.app)**
+**[contact@golieux.com](mailto:contact@golieux.com)**
 
 ---
 

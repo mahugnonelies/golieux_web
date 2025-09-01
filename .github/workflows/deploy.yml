@@ -30,6 +30,7 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      # ⚠️ Base-href = /<nom_du_repo>/ et on désactive le service worker
       - name: Build Flutter Web (release)
         run: flutter build web --release --base-href=/golieux_web/
 

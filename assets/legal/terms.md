@@ -1,7 +1,7 @@
 # Conditions d’utilisation — GoLieux
 
 **Dernière mise à jour : 15/09/2025**
-**Contact : [contact@golieux.app](mailto:contact@golieux.app)**
+**Contact : [contact@golieux.com](mailto:contact@golieux.com)**
 
 Merci d’utiliser **GoLieux**. En accédant à l’application ou au site, vous acceptez pleinement ces Conditions. Si vous n’êtes pas d’accord, veuillez ne pas utiliser le service.
 
@@ -91,6 +91,6 @@ En cas de litige, et à défaut de règlement amiable, les **tribunaux compéten
 ## 12) Contact
 
 Pour toute question liée à ces Conditions :
-**[contact@golieux.app](mailto:contact@golieux.app)**
+**[contact@golieux.com](mailto:contact@golieux.com)**
 
 > Ce document est fourni à titre d’information générale et ne constitue pas un conseil juridique.

@@ -3,8 +3,8 @@
 **Éditeur / Propriétaire**
 **MAHUGNON ELIE SOGLO** — *Entreprise individuelle*
 Cotonou, Bénin
-**E-mail :** [contact@golieux.app](mailto:contact@golieux.app)
-**Téléphone :** +229 62 49 70 00
+**E-mail :** [contact@golieux.com](mailto:contact@golieux.com)
+**Téléphone :** +229 01 62 49 70 00
 
 **Directeur de la publication**
 MAHUGNON ELIE SOGLO
@@ -51,7 +51,7 @@ Leur disponibilité et leurs politiques peuvent avoir un impact sur le service.
 
 ## 5) Signalement d’un contenu illicite
 
-Pour signaler un contenu manifestement illicite (fausse information, atteinte à la vie privée, droits d’auteur, etc.), merci d’écrire à **[contact@golieux.app](mailto:contact@golieux.app)** en précisant :
+Pour signaler un contenu manifestement illicite (fausse information, atteinte à la vie privée, droits d’auteur, etc.), merci d’écrire à **[contact@golieux.com](mailto:contact@golieux.com)** en précisant :
 
 * le lien/la fiche concernée,
 * la description du problème,
@@ -78,5 +78,5 @@ En cas de litige, et à défaut de règlement amiable, les tribunaux compétents
 
 ## 8) Contact
 
-**Support & questions légales :** [contact@golieux.app](mailto:contact@golieux.app) — **+229 62 49 70 00**
+**Support & questions légales :** [contact@golieux.com](mailto:contact@golieux.com) — **+229 01 62 49 70 00**
 Document informatif, ne constituant pas un conseil juridique.

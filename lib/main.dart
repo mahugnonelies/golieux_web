@@ -430,30 +430,34 @@ class _Footer extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      color: cs.surfaceVariant.withOpacity(0.3),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            runSpacing: 10,
+          child: Column(
             children: [
-              Text('CONÇU PAR MAHUGNON ELIE SOGLO',
-                  style: TextStyle(color: cs.outline)),
+              Text(
+                '© 2025 GoLieux — Conçu par Mahugnon Elie Soglo',
+                style: TextStyle(color: cs.outline),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
               Wrap(
-                spacing: 16,
+                alignment: WrapAlignment.center,
+                spacing: 20,
                 children: [
                   TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/privacy'),
-                      child: const Text('Confidentialité')),
+                    onPressed: () => Navigator.pushNamed(context, '/privacy'),
+                    child: const Text('Politique de confidentialité'),
+                  ),
                   TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/terms'),
-                      child: const Text('Conditions')),
+                    onPressed: () => Navigator.pushNamed(context, '/terms'),
+                    child: const Text("Conditions d’utilisation"),
+                  ),
                   TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/legal'),
-                      child: const Text('Mentions légales')),
+                    onPressed: () => Navigator.pushNamed(context, '/legal'),
+                    child: const Text("Mentions légales"),
+                  ),
                 ],
               ),
             ],
