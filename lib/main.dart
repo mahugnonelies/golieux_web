@@ -138,11 +138,11 @@ class _HeroSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.white.withOpacity(0.25)),
               ),
-              child: const Center(
+              child: Center(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  // Remplace par Image.asset('assets/hero.png', fit: BoxFit.contain)
-                  child: Icon(Icons.map_rounded, size: 120, color: Colors.white),
+                  padding: const EdgeInsets.all(16.0),
+                    child: Image.asset('assets/hero.png', fit: BoxFit.contain),
+                 // child: Icon(Icons.map_rounded, size: 120, color: Colors.white),
                 ),
               ),
             ),
@@ -301,7 +301,7 @@ class _ScreenshotsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
-    Widget card(Widget child) => Container(
+    Widget card(String assetPath) => Container(
       width: 280,
       height: 520,
       decoration: BoxDecoration(
@@ -311,7 +311,10 @@ class _ScreenshotsSection extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
-        child: child,
+        child: Image.asset(
+          assetPath,
+          fit: BoxFit.cover,
+        ),
       ),
     );
 
@@ -334,19 +337,9 @@ class _ScreenshotsSection extends StatelessWidget {
                 spacing: 18,
                 runSpacing: 18,
                 children: [
-                  // Remplace ces Containers par Image.asset(...) si tu as des captures.
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.map, size: 64)))),
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.search, size: 64)))),
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.place, size: 64)))),
+                  card('assets/screen1.png'),
+                  card('assets/screen2.png'),
+                  card('assets/screen3.png'),
                 ],
               ),
             ],
