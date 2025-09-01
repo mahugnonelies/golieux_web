@@ -3,19 +3,22 @@ name: Build & Deploy Flutter Web to GitHub Pages
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+# Empêche les déploiements concurrents
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,12 +33,18 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      # ⚠️ Base-href = /<nom_du_repo>/ et on désactive le service worker
       - name: Build Flutter Web (release)
         run: flutter build web --release --base-href=/golieux_web/
 
-      # On donne à GitHub Pages notre dossier build/web comme artefact
-      - name: Upload Pages artifact
+      # SPA fallback : GitHub Pages sert 404.html sur routes profondes
+      - name: Add SPA fallback (404.html)
+        run: cp build/web/index.html build/web/404.html
+
+      # 🔴 ICI on attache le domaine à chaque déploiement
+      - name: Add CNAME for custom domain
+        run: echo "www.golieux.com" > build/web/CNAME
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
@@ -50,3 +59,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
