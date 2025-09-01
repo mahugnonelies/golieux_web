@@ -35,8 +35,8 @@ Toute reproduction, représentation, modification, extraction substantielle ou r
 
 Pour comprendre la collecte, l’usage, la durée de conservation de vos données et vos droits, consultez :
 
-* **[Politique de confidentialité](https://www.golieux.com/#/privacy)**
-* **[Conditions d’utilisation](https://www.golieux.com/#/terms)**
+* **[Politique de confidentialité](../md_viewer.html?file=legal/privacy.md)**
+* **[Conditions d’utilisation](../md_viewer.html?file=legal/terms.md)**
 
 Ces documents précisent notamment les bases légales, la finalité des traitements, la sécurité, ainsi que les modalités d’exercice de vos droits.
 
