@@ -1,7 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,10 +9,6 @@ void main() {
 
 class GoLieuxLanding extends StatelessWidget {
   const GoLieuxLanding({super.key});
-
-  static const _privacyPath = 'assets/legal/privacy.md';
-  static const _termsPath = 'assets/legal/terms.md';
-  static const _legalPath = 'assets/legal/legal_notice.md';
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +23,17 @@ class GoLieuxLanding extends StatelessWidget {
       theme: theme,
       home: const _Home(),
       routes: {
-        '/privacy': (_) => const _MarkdownPage(
+        '/privacy': (_) => const _DocPage(
           title: 'Politique de confidentialité',
-          assetPath: _privacyPath,
+          body: _privacyText,
         ),
-        '/terms': (_) => const _MarkdownPage(
-          title: 'Conditions d’utilisation',
-          assetPath: _termsPath,
+        '/terms': (_) => const _DocPage(
+          title: 'Conditions générales',
+          body: _termsText,
         ),
-        '/legal': (_) => const _MarkdownPage(
+        '/legal': (_) => const _DocPage(
           title: 'Mentions légales',
-          assetPath: _legalPath,
+          body: _legalText,
         ),
       },
     );
@@ -80,8 +74,7 @@ class _HeroSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [cs.primary, cs.primaryContainer],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topLeft, end: Alignment.bottomRight,
         ),
       ),
       child: LayoutBuilder(
@@ -92,8 +85,7 @@ class _HeroSection extends StatelessWidget {
             fontWeight: FontWeight.w800,
             height: 1.1,
           );
-          final subtitleStyle =
-          Theme.of(context).textTheme.titleMedium?.copyWith(
+          final subtitleStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
             color: cs.onPrimary.withOpacity(0.95),
           );
 
@@ -115,13 +107,12 @@ class _HeroSection extends StatelessWidget {
                   _StoreButton(
                     label: 'Télécharger sur Play Store',
                     icon: Icons.android,
-                    onTap: () => _launch(
-                        'https://play.google.com/store/apps/details?id=com.example.golieux'),
+                    onTap: () => _launch('https://play.google.com/store/apps/details?id=com.example.golieux'),
                   ),
-                  const _StoreButton(
+                  _StoreButton(
                     label: 'Bientôt sur App Store',
                     icon: Icons.apple,
-                    onTap: _noop,
+                    onTap: () {}, // à activer quand dispo
                     disabled: true,
                   ),
                 ],
@@ -130,7 +121,7 @@ class _HeroSection extends StatelessWidget {
           );
 
           final right = AspectRatio(
-            aspectRatio: 3 / 2,
+            aspectRatio: 3/2,
             child: Container(
               margin: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
@@ -181,22 +172,10 @@ class _FeaturesSection extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     final items = const [
-      _Feature(
-          icon: Icons.flash_on,
-          title: 'Rapide',
-          text: 'Des résultats pertinents en un coup d’œil.'),
-      _Feature(
-          icon: Icons.verified,
-          title: 'Fiable',
-          text: 'Fiches modérées avant publication.'),
-      _Feature(
-          icon: Icons.public,
-          title: 'Local',
-          text: 'Pensé pour les villes et départements du Bénin.'),
-      _Feature(
-          icon: Icons.shield_outlined,
-          title: 'Sécurisé',
-          text: 'Connexion sans mot de passe par code OTP.'),
+      _Feature(icon: Icons.flash_on, title: 'Rapide', text: 'Des résultats pertinents en un coup d’œil.'),
+      _Feature(icon: Icons.verified, title: 'Fiable', text: 'Fiches modérées avant publication.'),
+      _Feature(icon: Icons.public, title: 'Local', text: 'Pensé pour les villes et départements du Bénin.'),
+      _Feature(icon: Icons.shield_outlined, title: 'Sécurisé', text: 'Connexion sans mot de passe par code OTP.'),
     ];
 
     return Container(
@@ -207,27 +186,21 @@ class _FeaturesSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Pourquoi GoLieux?',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.w800)),
+              Text('Pourquoi GoLieux ?', style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              )),
               const SizedBox(height: 18),
               LayoutBuilder(
                 builder: (context, c) {
-                  final col = c.maxWidth > 950
-                      ? 4
-                      : (c.maxWidth > 700 ? 2 : 1);
+                  final col = c.maxWidth > 950 ? 4 : (c.maxWidth > 700 ? 2 : 1);
                   return Wrap(
                     spacing: 16,
                     runSpacing: 16,
                     children: List.generate(items.length, (i) {
-                      final w =
-                          c.maxWidth / col - (16 * (col - 1)) / col;
+                      final w = c.maxWidth / col - (16 * (col - 1)) / col;
                       return SizedBox(
                         width: max(260, min(w, 360)),
-                        child: _FeatureCard(
-                            item: items[i], color: cs.primary),
+                        child: _FeatureCard(item: items[i], color: cs.primary),
                       );
                     }),
                   );
@@ -262,12 +235,7 @@ class _FeatureCard extends StatelessWidget {
         color: cs.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: cs.primary.withOpacity(0.12)),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 8,
-              offset: const Offset(0, 3))
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 3))],
       ),
       child: Row(
         children: [
@@ -280,8 +248,7 @@ class _FeatureCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title,
-                    style: const TextStyle(fontWeight: FontWeight.w700)),
+                Text(item.title, style: const TextStyle(fontWeight: FontWeight.w700)),
                 const SizedBox(height: 4),
                 Text(item.text),
               ],
@@ -324,29 +291,18 @@ class _ScreenshotsSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Aperçu de l’application',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.w800)),
+              Text('Aperçu de l’application', style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              )),
               const SizedBox(height: 18),
               Wrap(
                 spacing: 18,
                 runSpacing: 18,
                 children: [
-                  // Remplace ces Containers par Image.asset(...) si tu as des captures.
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.map, size: 64)))),
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.search, size: 64)))),
-                  card(Container(
-                      color: cs.primary.withOpacity(0.08),
-                      child: const Center(
-                          child: Icon(Icons.place, size: 64)))),
+                  // Remplace les Containers par Image.asset('assets/screen1.png', fit: BoxFit.cover)
+                  card(Container(color: cs.primary.withOpacity(0.08), child: const Center(child: Icon(Icons.map, size: 64)))),
+                  card(Container(color: cs.primary.withOpacity(0.08), child: const Center(child: Icon(Icons.search, size: 64)))),
+                  card(Container(color: cs.primary.withOpacity(0.08), child: const Center(child: Icon(Icons.place, size: 64)))),
                 ],
               ),
             ],
@@ -370,8 +326,7 @@ class _CtaSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [cs.primaryContainer, cs.primary],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topLeft, end: Alignment.bottomRight,
         ),
       ),
       child: Center(
@@ -404,8 +359,7 @@ class _CtaSection extends StatelessWidget {
                   _StoreButton(
                     label: 'Télécharger sur Play Store',
                     icon: Icons.android,
-                    onTap: () => _launch(
-                        'https://play.google.com/store/apps/details?id=com.example.golieux'),
+                    onTap: () => _launch('https://play.google.com/store/apps/details?id=com.example.golieux'),
                   ),
                   _GhostButton(
                     label: 'Lire la politique de confidentialité',
@@ -437,23 +391,13 @@ class _Footer extends StatelessWidget {
             alignment: WrapAlignment.spaceBetween,
             runSpacing: 10,
             children: [
-              Text('CONÇU PAR MAHUGNON ELIE SOGLO',
-                  style: TextStyle(color: cs.outline)),
+              Text('CONÇU PAR MAHUGNON ELIE SOGLO', style: TextStyle(color: cs.outline)),
               Wrap(
                 spacing: 16,
                 children: [
-                  TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/privacy'),
-                      child: const Text('Confidentialité')),
-                  TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/terms'),
-                      child: const Text('Conditions')),
-                  TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/legal'),
-                      child: const Text('Mentions légales')),
+                  TextButton(onPressed: () => Navigator.pushNamed(context, '/privacy'), child: const Text('Confidentialité')),
+                  TextButton(onPressed: () => Navigator.pushNamed(context, '/terms'), child: const Text('Conditions')),
+                  TextButton(onPressed: () => Navigator.pushNamed(context, '/legal'), child: const Text('Mentions légales')),
                 ],
               ),
             ],
@@ -470,11 +414,7 @@ class _StoreButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
   final bool disabled;
-  const _StoreButton(
-      {required this.label,
-        required this.icon,
-        required this.onTap,
-        this.disabled = false});
+  const _StoreButton({required this.label, required this.icon, required this.onTap, this.disabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -485,8 +425,7 @@ class _StoreButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         backgroundColor: disabled ? cs.surfaceVariant : cs.primary,
         foregroundColor: cs.onPrimary,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       icon: Icon(icon),
       label: Text(label),
@@ -503,78 +442,62 @@ class _GhostButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 14)),
+      style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14)),
       child: Text(label),
     );
   }
 }
 
-/* ------------------ PAGE MARKDOWN ------------------ */
-class _MarkdownPage extends StatelessWidget {
+/* ------------------ PAGES DOC ------------------ */
+class _DocPage extends StatelessWidget {
   final String title;
-  final String assetPath;
-  const _MarkdownPage({required this.title, required this.assetPath});
-
-  Future<String> _load() async {
-    try {
-      return await rootBundle.loadString(assetPath);
-    } catch (e) {
-      return '# Oups…\n\n'
-          'Impossible de charger ce document (`$assetPath`).\n\n'
-          '- Vérifie que le fichier existe bien dans *assets/*\n'
-          '- Et qu’il est bien listé dans **pubspec.yaml**.\n';
-    }
-  }
+  final String body;
+  const _DocPage({required this.title, required this.body});
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: FutureBuilder<String>(
-        future: _load(),
-        builder: (context, snap) {
-          if (!snap.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return Markdown(
-            data: snap.data!,
-            padding: const EdgeInsets.fromLTRB(20, 14, 20, 40),
-            styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-              h1: Theme.of(context)
-                  .textTheme
-                  .headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.w800),
-              h2: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w800),
-              p: Theme.of(context).textTheme.bodyMedium,
-              blockquoteDecoration: BoxDecoration(
-                color: cs.primary.withOpacity(0.06),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: cs.primary.withOpacity(0.18)),
-              ),
-              codeblockDecoration: BoxDecoration(
-                color: cs.surfaceVariant.withOpacity(0.35),
-                borderRadius: BorderRadius.circular(8),
-              ),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          Text(title, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
+          const SizedBox(height: 14),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: cs.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: cs.primary.withOpacity(0.10)),
             ),
-            onTapLink: (text, href, title) {
-              if (href != null) _launch(href);
-            },
-          );
-        },
+            child: Text(body),
+          ),
+        ],
       ),
     );
   }
 }
 
-/* ------------------ UTILS ------------------ */
-void _noop() {}
+/* ------------------ TEXTES ------------------ */
+const _privacyText =
+    'Cette politique décrit comment GoLieux collecte, utilise et protège vos données…\n'
+    '• Données de compte (email/téléphone) pour l’authentification OTP\n'
+    '• Données d’usage anonymisées pour améliorer le service\n'
+    '• Vous pouvez demander la suppression à tout moment…';
 
+const _termsText =
+    'En utilisant GoLieux, vous acceptez ces conditions…\n'
+    '• Utilisation raisonnable de l’app\n'
+    '• Respect de la vie privée des établissements\n'
+    '• Interdiction de contenu illégal, etc.';
+
+const _legalText =
+    'GoLieux — Éditeur : Mahugnon Elie Soglo.\n'
+    'Contact : mahugnonelies@gmail.com\n'
+    'Hébergement : selon votre fournisseur (Netlify, Firebase, etc.).';
+
+/* ------------------ UTILS ------------------ */
 Future<void> _launch(String url) async {
   final uri = Uri.parse(url);
   if (await canLaunchUrl(uri)) {
