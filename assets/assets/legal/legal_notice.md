@@ -1,8 +1,9 @@
 # Mentions légales — GoLieux
 
-**Éditeur / Propriétaire**
-**MAHUGNON ELIE SOGLO** — *Entreprise individuelle*
-Cotonou, Bénin
+**Éditeur**
+**MAHUGNON SERVICES LTD** — *Société à responsabilité limitée enregistrée au Royaume-Uni*
+20 Wenlock Road, Londres, N1 7GU
+**Numéro d'entreprise :** 16010860
 **E-mail :** [contact@golieux.com](mailto:contact@golieux.com)
 **Téléphone :** +229 01 62 49 70 00
 
@@ -35,8 +36,8 @@ Toute reproduction, représentation, modification, extraction substantielle ou r
 
 Pour comprendre la collecte, l’usage, la durée de conservation de vos données et vos droits, consultez :
 
-* **[Politique de confidentialité](privacy.md)**
-* **[Conditions d’utilisation](terms.md)**
+* **[Politique de confidentialité](../md_viewer.html?file=legal/privacy.md)**
+* **[Conditions d’utilisation](../md_viewer.html?file=legal/terms.md)**
 
 Ces documents précisent notamment les bases légales, la finalité des traitements, la sécurité, ainsi que les modalités d’exercice de vos droits.
 
