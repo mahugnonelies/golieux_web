@@ -1,16 +1,19 @@
 # Mentions légales — GoLieux
 
-**Éditeur**
+**Éditeur :**
 **MAHUGNON SERVICES LTD** — *Société à responsabilité limitée enregistrée au Royaume-Uni*
 20 Wenlock Road, Londres, N1 7GU
-**Numéro d'entreprise :** 16010860
-**E-mail :** [contact@golieux.com](mailto:contact@golieux.com)
-**Téléphone :** +229 01 62 49 70 00
 
-**Directeur de la publication**
+**Numéro d'entreprise :** 16010860
+
+**E-mail :** [contact@golieux.com](mailto:contact@golieux.com)
+
+**Téléphone :** +229 0162497000 / +44 7492 804164
+
+**Directeur de la publication :**
 MAHUGNON ELIE SOGLO
 
-**Hébergement & services techniques**
+**Hébergement & services techniques :**
 Supabase + Google (Apps Script/Sheets)
 Serveurs cloud – UE/US (selon régions des prestataires)
 [https://supabase.com](https://supabase.com) — [https://workspace.google.com](https://workspace.google.com)
