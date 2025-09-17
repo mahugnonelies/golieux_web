@@ -15,6 +15,7 @@ class GoLieuxLanding extends StatelessWidget {
   static const _privacyPath = 'assets/legal/privacy.md';
   static const _termsPath = 'assets/legal/terms.md';
   static const _legalPath = 'assets/legal/legal_notice.md';
+  static const _deletePath = 'assets/legal/delete_account.md';
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,10 @@ class GoLieuxLanding extends StatelessWidget {
         '/legal': (_) => const _MarkdownPage(
           title: 'Mentions légales',
           assetPath: _legalPath,
+        ),
+        '/delete': (_) => const _MarkdownPage(
+          title: 'Suppression de compte',
+          assetPath: _deletePath,
         ),
       },
     );
@@ -450,6 +455,10 @@ class _Footer extends StatelessWidget {
                   TextButton(
                     onPressed: () => Navigator.pushNamed(context, '/legal'),
                     child: const Text("Mentions légales"),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/delete'),
+                    child: const Text("Suppression de compte"),
                   ),
                 ],
               ),
