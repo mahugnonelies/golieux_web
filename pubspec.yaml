@@ -48,6 +48,7 @@ flutter:
     - assets/legal/privacy.md
     - assets/legal/terms.md
     - assets/legal/legal_notice.md
+    - assets/legal/delete_account.md
 
     - assets/hero.png
     - assets/screen1.png
