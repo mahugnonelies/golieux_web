@@ -1,4 +1,4 @@
-# Mentions légales — GoLieux
+# Mentions légales — GoLieuX
 
 **Éditeur :**
 **MAHUGNON SERVICES LTD** — *Société à responsabilité limitée enregistrée au Royaume-Uni*
