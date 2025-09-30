@@ -403,7 +403,7 @@ class _CtaSection extends StatelessWidget {
                     label: 'Télécharger sur Play Store',
                     icon: Icons.android,
                     onTap: () => _launch(
-                        'https://play.google.com/store/apps/details?id=com.example.golieux'),
+                        'https://play.google.com/store/apps/details?id=com.golieux.app&pcampaignid=web_share'),
                   ),
                   _GhostButton(
                     label: 'Lire la politique de confidentialité',
